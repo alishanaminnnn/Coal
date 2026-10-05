@@ -1,18 +1,18 @@
 org 0x0100
 
-mov SI,0
-mov AL,0
-mov CX,4
+mov si, 6
+mov di, 0
+mov cx, 7
 
-label:
-add AL,[num1+SI]
-add SI,1
-sub CX,1
-JNZ label
-mov [total],AL
-mov ax,0x4c00
+loop1:
+mov al, [arr + si]
+mov [reverse + di], al
+sub si, 1
+add di, 1
+loop loop1
+
+mov ax, 0x4c00
 int 0x21
 
-
-num1: db 1,2,3,4
-total: dw 0
+arr: db 10, 20, 30,30, 40, 50, 60
+reverse: db 0, 0, 0, 0, 0, 0
