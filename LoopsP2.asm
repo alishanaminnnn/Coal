@@ -1,11 +1,14 @@
-org[0x0100]
+org 0x0100
+
 mov bx,0
 mov ax,0
 mov cx,10
-l1:add ax,[num1,bx]
+
+l1:
+add ax,[num1+bx]
 add bx,2
-sub bx,1
-jnz l1
+loop l1
+
 mov [total],ax
 
 mov ax,0x4c00
