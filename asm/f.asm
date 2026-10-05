@@ -1,18 +1,18 @@
 org 0x0100
 
-mov bx,0
-mov ax,0
-mov cx,10
+mov SI,0
+mov AL,0
+mov CX,4
 
-l1:
-add ax,[num1+bx]
-add bx,2
-loop l1
-
-mov [total],ax
-
+label:
+add AL,[num1+SI]
+add SI,1
+sub CX,1
+JNZ label
+mov [total],AL
 mov ax,0x4c00
 int 0x21
 
-num1: dw 1,2,3,4,5,6,7,8,6,5
+
+num1: db 1,2,3,4
 total: dw 0
