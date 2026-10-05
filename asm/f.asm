@@ -1,18 +1,24 @@
-org 0x0100
+org 0x100
 
-mov si, 6
-mov di, 0
-mov cx, 7
+mov bl, 0
+mov si, 0
+mov al, 0
+mov cx, 4
 
 loop1:
-mov al, [arr + si]
-mov [reverse + di], al
-sub si, 1
-add di, 1
-loop loop1
+    add bl, [arr + si]
+    jo overflow
 
-mov ax, 0x4c00
-int 0x21
+    add si, 1
+    loop loop1
+    jmp complete
 
-arr: db 10, 20, 30,30, 40, 50, 60
-reverse: db 0, 0, 0, 0, 0, 0
+overflow:
+    add al, 1
+
+complete:
+
+    mov ax, 0x4c00
+    int 0x21
+
+arr: db 100, 50, 30, 20
