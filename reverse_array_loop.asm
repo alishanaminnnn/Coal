@@ -1,15 +1,16 @@
 org 0x0100
-
-mov si, 5
-mov di, 0
-mov cx, 6
+mov al,6
+mov di,0
+mov si,5
+mov dl,0
 
 loop1:
-mov al, [arr + si]
-mov [reverse + di], al
-sub si, 1
-add di, 1
-loop loop1
+mov dl,[arr+si]
+mov [reverse+di],dl
+inc di
+dec si
+cmp di,al
+jnz loop1
 
 mov ax, 0x4c00
 int 0x21
