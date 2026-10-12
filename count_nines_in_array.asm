@@ -1,18 +1,27 @@
 org 0x0100
-
-mov si, 0
-mov cx, 8
-mov ax, 0
+mov ax,8
+mov cx,0
+mov bx,0
 
 loop1:
-    cmp byte [arr + si], 9
-    jne skip
-    add ax, 1
+cmp [arr+bx],9
+jz counter
+inc bx
+cmp bx,ax
+jz end
+jmp loop1
 
-skip:
-    add si, 1
-    loop loop1
 
+
+counter:
+inc cx
+inc 
+cmp bx, ax     
+jz end   
+jmp loop1
+
+
+end:
 mov ax, 0x4c00
 int 0x21
 
