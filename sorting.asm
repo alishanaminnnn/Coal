@@ -26,7 +26,6 @@ inc cx
 cmp cx,9
 jnz loop1
 
-
 exit:
 mov ax,0x4c00
 int 0x21
