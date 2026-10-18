@@ -56,3 +56,27 @@ exit:
 mov [max],al
 mov ax,0x4c00
 int 0x21
+
+
+
+
+; 2. Search with a count. Count how many times the value 7 appears in arr2 DB 7, 3, 7,
+; 7, 1, 7 . Store the count in BL .
+
+org 0x0100
+jmp start:
+arr2: db 7,3,7,7,1,7
+start:
+mov al,6
+mov bx,0
+mov cx,0
+
+loop1:
+cmp [arr2+bx],7
+jnz notequal
+inc cx
+
+notequal:
+inc bx
+cmp bx,al
+jnz loop1
