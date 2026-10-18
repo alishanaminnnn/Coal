@@ -27,3 +27,32 @@ mov ax,0x4c00
 int 0x21
 
 
+; Code task (Max): An array arr DB 5, 12, 3, 20, 8 has 5 elements. Write assembly
+; code that finds the largest element and stores it in AL
+
+org 0x0100
+jmp start
+arr: DB 5, 12, 3, 20, 8
+max: DB 0
+
+start:
+mov al,[arr+0] ;5 is initialized as max
+mov bx,1
+mov cl,5
+
+loop1:
+cmp al,[arr+bx]
+jae next
+mov al,[arr+bx]
+
+
+
+next:
+inc bx
+cmp bl,cl
+jnz loop1
+
+exit:
+mov [max],al
+mov ax,0x4c00
+int 0x21
