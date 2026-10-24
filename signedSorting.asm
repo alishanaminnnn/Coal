@@ -1,30 +1,35 @@
 org 0x0100
-jmp start:
+jmp start
 arr : dw 7,-2,15,4,-8,10,0,3
-swapCount : dw 0
+swapCount : db 0
 
 start:
-mov bx,0
-mov cx,9
+    mov cx, 7              
 
-l1:
-cmp [arr+bx]+[arr+bx+1]
-jge noSwap
-mov ax,[arr+bx]
-mov dx,[arr+bx+1]
-mov [arr+bx],dx
-mov [arr+bx+1],ax
+outer:
+    mov bx, 0
+    mov si, 0              
 
-inc bx
-cmp bx,cx
-jnz l1
-jmp exit
+inner:
+    mov ax, [arr+bx]
+    mov dx, [arr+bx+2]
+    cmp ax, dx
+    jge noswap             
 
-noSwap:
-inc bx
-cmp bx,cx
-jnz l1
+    mov [arr+bx], dx
+    mov [arr+bx+2], ax
+    inc byte [swapCount]
+    mov si, 1
+
+noswap:
+    add bx, 2
+    cmp bx, 14
+    jl  inner
+
+    cmp si, 0
+    je  exit
+    loop outer
 
 exit:
-mov ax,0x4c00
-int 21h
+    mov ax, 0x4C00
+    int 21h
