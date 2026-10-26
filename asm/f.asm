@@ -1,24 +1,40 @@
-org 0x100
+    org 0x0100
 
-mov bl, 0
-mov si, 0
-mov al, 0
-mov cx, 4
+    jmp start
+arr:
+    dw  13,12,5,17,10,9,8,20
+
+
+start:
+    mov cx,14
+    mov si,0
+
+
+outer:
+    mov bx,0
 
 loop1:
-    add bl, [arr + si]
-    jo overflow
+    mov ax,[arr+bx]
+    cmp ax,[arr+bx+2]
+    jge noSwap
+    mov dx,[arr+bx+2]
+    mov [arr+bx],dx
+    mov [arr+bx+2],ax
 
-    add si, 1
-    loop loop1
-    jmp complete
 
-overflow:
-    add al, 1
+noSwap:
+    add bx,2
+    cmp cx,bx
+    jnz loop1
 
-complete:
 
-    mov ax, 0x4c00
-    int 0x21
+exit:
+    inc si
+    cmp si,7
+    jnz outer
 
-arr: db 100, 50, 30, 20
+
+
+
+    mov ax,0x4c00
+    int 21h
