@@ -15,7 +15,7 @@ start:
 loop1:
     test cl,1
     jz   shifter
-    add  dx,ax
+    add  dx,al
 
 shifter:
     shl  al,1
